@@ -3,7 +3,5 @@
   <appSettings>
     <add key="IsStaging" value="True" />
     <add key="Environment" value="Dev" />
-    <remove key="storagePath" value="d:/temp/" />
-    <!--  ###### Storage Section ##### -->
   </appSettings>
 </configuration>

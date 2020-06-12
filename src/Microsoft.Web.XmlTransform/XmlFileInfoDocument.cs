@@ -18,56 +18,71 @@ namespace XdtExtensions.Microsoft.Web.XmlTransform
         private int _lineNumberOffset = 0;
         private int _linePositionOffset = 0;
 
-        public override void Load(string filename) {
+        private List<XmlWhitespace> newWhiteSpaces = new List<XmlWhitespace>();
+        private List<XmlNode> newNodes = new List<XmlNode>();
+
+        public override void Load(string filename)
+        {
             LoadFromFileName(filename);
 
             _firstLoad = false;
         }
 
-        public override void Load(XmlReader reader) {
+        public override void Load(XmlReader reader)
+        {
             _reader = reader as XmlTextReader;
-            if (_reader != null) {
+            if (_reader != null)
+            {
                 _fileName = _reader.BaseURI;
             }
 
             base.Load(reader);
 
-            if (_reader != null) {
+            if (_reader != null)
+            {
                 _textEncoding = _reader.Encoding;
             }
 
             _firstLoad = false;
         }
 
-        private void LoadFromFileName(string filename) {
+        private void LoadFromFileName(string filename)
+        {
             _fileName = filename;
 
             StreamReader reader = null;
-            try {
-                if (PreserveWhitespace) {
+            try
+            {
+                if (PreserveWhitespace)
+                {
                     _preservationProvider = new XmlAttributePreservationProvider(filename);
                 }
 
                 reader = new StreamReader(filename, true);
                 LoadFromTextReader(reader);
             }
-            finally {
+            finally
+            {
                 if (_preservationProvider != null)
                 {
                     _preservationProvider.Close();
                     _preservationProvider = null;
                 }
-                if (reader != null) {
+                if (reader != null)
+                {
                     reader.Close();
                 }
             }
         }
 
-        private void LoadFromTextReader(TextReader textReader) {
+        private void LoadFromTextReader(TextReader textReader)
+        {
             StreamReader streamReader = textReader as StreamReader;
-            if (streamReader != null) {
+            if (streamReader != null)
+            {
                 FileStream fileStream = streamReader.BaseStream as FileStream;
-                if (fileStream != null) {
+                if (fileStream != null)
+                {
                     _fileName = fileStream.Name;
                 }
 
@@ -78,14 +93,17 @@ namespace XdtExtensions.Microsoft.Web.XmlTransform
 
             base.Load(_reader);
 
-            if (_textEncoding == null) {
+            if (_textEncoding == null)
+            {
                 _textEncoding = _reader.Encoding;
             }
         }
 
-        private Encoding GetEncodingFromStream(Stream stream) {
+        private Encoding GetEncodingFromStream(Stream stream)
+        {
             Encoding encoding = null;
-            if (stream.CanSeek) {
+            if (stream.CanSeek)
+            {
                 byte[] buffer = new byte[3];
                 stream.Read(buffer, 0, buffer.Length);
 
@@ -105,14 +123,17 @@ namespace XdtExtensions.Microsoft.Web.XmlTransform
             return encoding;
         }
 
-        internal XmlNode CloneNodeFromOtherDocument(XmlNode element) {
+        internal XmlNode CloneNodeFromOtherDocument(XmlNode element)
+        {
             XmlTextReader oldReader = _reader;
             string oldFileName = _fileName;
 
             XmlNode clone = null;
-            try {
+            try
+            {
                 IXmlLineInfo lineInfo = element as IXmlLineInfo;
-                if (lineInfo != null) {
+                if (lineInfo != null)
+                {
                     _reader = new XmlTextReader(new StringReader(element.OuterXml));
 
                     _lineNumberOffset = lineInfo.LineNumber - 1;
@@ -121,14 +142,16 @@ namespace XdtExtensions.Microsoft.Web.XmlTransform
 
                     clone = ReadNode(_reader);
                 }
-                else {
+                else
+                {
                     _fileName = null;
                     _reader = null;
 
                     clone = ReadNode(new XmlTextReader(new StringReader(element.OuterXml)));
                 }
             }
-            finally {
+            finally
+            {
                 _lineNumberOffset = 0;
                 _linePositionOffset = 0;
                 _fileName = oldFileName;
@@ -139,54 +162,73 @@ namespace XdtExtensions.Microsoft.Web.XmlTransform
             return clone;
         }
 
-        internal bool HasErrorInfo {
-            get {
+        internal bool HasErrorInfo
+        {
+            get
+            {
                 return _reader != null;
             }
         }
 
-        internal string FileName {
-            get {
+        internal string FileName
+        {
+            get
+            {
                 return _fileName;
             }
         }
 
-        private int CurrentLineNumber {
-            get {
+        private int CurrentLineNumber
+        {
+            get
+            {
                 return _reader != null ? _reader.LineNumber + _lineNumberOffset : 0;
             }
         }
 
-        private int CurrentLinePosition {
-            get {
+        private int CurrentLinePosition
+        {
+            get
+            {
                 return _reader != null ? _reader.LinePosition + _linePositionOffset : 0;
             }
         }
 
-        private bool FirstLoad {
-            get {
+        private bool FirstLoad
+        {
+            get
+            {
                 return _firstLoad;
             }
         }
 
-        private XmlAttributePreservationProvider PreservationProvider {
-            get {
+        private XmlAttributePreservationProvider PreservationProvider
+        {
+            get
+            {
                 return _preservationProvider;
             }
         }
 
-        private Encoding TextEncoding {
-            get {
-                if (_textEncoding != null) {
+        private Encoding TextEncoding
+        {
+            get
+            {
+                if (_textEncoding != null)
+                {
                     return _textEncoding;
                 }
-                else {
+                else
+                {
                     // Copied from base implementation of XmlDocument
-                    if (HasChildNodes) {
+                    if (HasChildNodes)
+                    {
                         XmlDeclaration declaration = FirstChild as XmlDeclaration;
-                        if (declaration != null) {
+                        if (declaration != null)
+                        {
                             string value = declaration.Encoding;
-                            if (value.Length > 0) {
+                            if (value.Length > 0)
+                            {
                                 return System.Text.Encoding.GetEncoding(value);
                             }
                         }
@@ -230,44 +272,82 @@ namespace XdtExtensions.Microsoft.Web.XmlTransform
         public override void Save(Stream w)
         {
             XmlWriter xmlWriter = null;
-            try {
-                if (PreserveWhitespace) {
+            try
+            {
+                if (PreserveWhitespace)
+                {
                     XmlFormatter.Format(this);
                     xmlWriter = new XmlAttributePreservingWriter(w, TextEncoding);
                 }
-                else {
+                else
+                {
                     XmlTextWriter textWriter = new XmlTextWriter(w, TextEncoding);
                     textWriter.Formatting = Formatting.Indented;
                     xmlWriter = textWriter;
                 }
                 WriteTo(xmlWriter);
             }
-            finally {
-                if (xmlWriter != null) {
+            finally
+            {
+                if (xmlWriter != null)
+                {
                     xmlWriter.Flush();
                 }
             }
         }
 
-        public override XmlElement CreateElement(string prefix, string localName, string namespaceURI) {
-            if (HasErrorInfo) {
+        public override XmlElement CreateElement(string prefix, string localName, string namespaceURI)
+        {
+            if (HasErrorInfo)
+            {
                 return new XmlFileInfoElement(prefix, localName, namespaceURI, this);
             }
-            else {
+            else
+            {
                 return base.CreateElement(prefix, localName, namespaceURI);
             }
         }
 
-        public override XmlAttribute CreateAttribute(string prefix, string localName, string namespaceURI) {
-            if (HasErrorInfo) {
+        public override XmlAttribute CreateAttribute(string prefix, string localName, string namespaceURI)
+        {
+            if (HasErrorInfo)
+            {
                 return new XmlFileInfoAttribute(prefix, localName, namespaceURI, this);
             }
-            else {
+            else
+            {
                 return base.CreateAttribute(prefix, localName, namespaceURI);
             }
         }
 
-        internal bool IsNewNode(XmlNode node) {
+        public override XmlWhitespace CreateWhitespace(string text)
+        {
+            System.Diagnostics.Debug.WriteLine($"{this.FirstLoad} CreateWhitespace text:{text}");
+            var instance = base.CreateWhitespace(text);
+            if (!this.FirstLoad)
+                newNodes.Add(instance);
+            return instance;
+        }
+
+        public override XmlComment CreateComment(string data)
+        {
+            System.Diagnostics.Debug.WriteLine($"{this.FirstLoad} CreateComment data:{data}");
+            var instance = base.CreateComment(data);
+            if (!this.FirstLoad)
+                newNodes.Add(instance);
+            return instance;
+        }
+
+        internal bool IsNewWhiteSpace(XmlNode node)
+        {
+            return newNodes.Contains(node);
+        }
+
+        internal bool IsNewNode(XmlNode node)
+        {
+            if (newNodes.Contains(node))
+                return true;
+
             // The transformation engine will only add elements. Anything
             // else that gets added must be contained by a new element.
             // So to determine what's new, we search up the tree for a new
@@ -276,8 +356,10 @@ namespace XdtExtensions.Microsoft.Web.XmlTransform
             return element != null && !element.IsOriginal;
         }
 
-        private XmlElement FindContainingElement(XmlNode node) {
-            while (node != null && !(node is XmlElement)) {
+        private XmlElement FindContainingElement(XmlNode node)
+        {
+            while (node != null && !(node is XmlElement))
+            {
                 node = node.ParentNode;
             }
             return node as XmlElement;
@@ -293,24 +375,30 @@ namespace XdtExtensions.Microsoft.Web.XmlTransform
             private XmlAttributePreservationDict preservationDict = null;
 
             internal XmlFileInfoElement(string prefix, string localName, string namespaceUri, XmlFileInfoDocument document)
-                : base(prefix, localName, namespaceUri, document) {
+                : base(prefix, localName, namespaceUri, document)
+            {
                 lineNumber = document.CurrentLineNumber;
                 linePosition = document.CurrentLinePosition;
                 isOriginal = document.FirstLoad;
 
-                if (document.PreservationProvider != null) {
+                if (document.PreservationProvider != null)
+                {
                     preservationDict = document.PreservationProvider.GetDictAtPosition(lineNumber, linePosition - 1);
                 }
-                if (preservationDict == null) {
+                if (preservationDict == null)
+                {
                     preservationDict = new XmlAttributePreservationDict();
                 }
             }
 
-            public override void WriteTo(XmlWriter w) {
+            public override void WriteTo(XmlWriter w)
+            {
                 string prefix = Prefix;
-                if (!String.IsNullOrEmpty(NamespaceURI)) {
+                if (!String.IsNullOrEmpty(NamespaceURI))
+                {
                     prefix = w.LookupPrefix(NamespaceURI);
-                    if (prefix == null) {
+                    if (prefix == null)
+                    {
                         prefix = Prefix;
                     }
                 }
@@ -318,65 +406,82 @@ namespace XdtExtensions.Microsoft.Web.XmlTransform
                 w.WriteStartElement(prefix, LocalName, NamespaceURI);
 
                 XmlAttributePreservingWriter preservingWriter = w as XmlAttributePreservingWriter;
-                if (preservingWriter == null || preservationDict == null) {
+                if (preservingWriter == null || preservationDict == null)
+                {
                     WriteAttributesTo(w);
                 }
-                else {
+                else
+                {
                     WritePreservedAttributesTo(preservingWriter);
                 }
 
-                if (IsEmpty) {
+                if (IsEmpty)
+                {
                     w.WriteEndElement();
                 }
-                else {
+                else
+                {
                     WriteContentTo(w);
                     w.WriteFullEndElement();
                 }
             }
 
-            private void WriteAttributesTo(XmlWriter w) {
+            private void WriteAttributesTo(XmlWriter w)
+            {
                 XmlAttributeCollection attrs = Attributes;
-                for (int i = 0; i < attrs.Count; i += 1) {
+                for (int i = 0; i < attrs.Count; i += 1)
+                {
                     XmlAttribute attr = attrs[i];
                     attr.WriteTo(w);
                 }
             }
 
-            private void WritePreservedAttributesTo(XmlAttributePreservingWriter preservingWriter) {
+            private void WritePreservedAttributesTo(XmlAttributePreservingWriter preservingWriter)
+            {
                 preservationDict.WritePreservedAttributes(preservingWriter, Attributes);
             }
 
             #region IXmlLineInfo Members
-            public bool HasLineInfo() {
+            public bool HasLineInfo()
+            {
                 return true;
             }
 
-            public int LineNumber {
-                get {
+            public int LineNumber
+            {
+                get
+                {
                     return lineNumber;
                 }
             }
 
-            public int LinePosition {
-                get {
+            public int LinePosition
+            {
+                get
+                {
                     return linePosition;
                 }
             }
 
-            public bool IsOriginal {
-                get {
+            public bool IsOriginal
+            {
+                get
+                {
                     return isOriginal;
                 }
             }
             #endregion
 
             #region IXmlFormattableNode Members
-            void IXmlFormattableAttributes.FormatAttributes(XmlFormatter formatter) {
+            void IXmlFormattableAttributes.FormatAttributes(XmlFormatter formatter)
+            {
                 preservationDict.UpdatePreservationInfo(Attributes, formatter);
             }
 
-            string IXmlFormattableAttributes.AttributeIndent {
-                get {
+            string IXmlFormattableAttributes.AttributeIndent
+            {
+                get
+                {
                     return preservationDict.GetAttributeNewLineString(null);
                 }
             }
@@ -391,24 +496,30 @@ namespace XdtExtensions.Microsoft.Web.XmlTransform
             private int linePosition;
 
             internal XmlFileInfoAttribute(string prefix, string localName, string namespaceUri, XmlFileInfoDocument document)
-                : base(prefix, localName, namespaceUri, document) {
+                : base(prefix, localName, namespaceUri, document)
+            {
                 lineNumber = document.CurrentLineNumber;
                 linePosition = document.CurrentLinePosition;
             }
 
             #region IXmlLineInfo Members
-            public bool HasLineInfo() {
+            public bool HasLineInfo()
+            {
                 return true;
             }
 
-            public int LineNumber {
-                get {
+            public int LineNumber
+            {
+                get
+                {
                     return lineNumber;
                 }
             }
 
-            public int LinePosition {
-                get {
+            public int LinePosition
+            {
+                get
+                {
                     return linePosition;
                 }
             }

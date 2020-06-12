@@ -171,7 +171,7 @@ namespace XdtExtensions.Microsoft.Web.XmlTransform
             int indexChange = HandleStartElement(node);
 
             // AkA:Change
-            // ReorderNewItemsAtEnd(node);
+            ReorderNewItemsAtEnd(node);
 
             // Loop over children
             FormatLoop(node);
@@ -194,11 +194,14 @@ namespace XdtExtensions.Microsoft.Web.XmlTransform
             // whitespace before the end tag
             if (!IsNewNode(node))
             {
-
                 // If the last child isn't whitespace, new elements might
                 // have been added
                 XmlNode iter = node.LastChild;
-                if (iter != null && iter.NodeType != XmlNodeType.Whitespace)
+                if (iter != null && 
+                    (iter.NodeType != XmlNodeType.Whitespace 
+                    || (iter.NodeType == XmlNodeType.Whitespace && document.IsNewWhiteSpace(iter))
+                    )
+                    )
                 {
 
                     // The loop continues until we find something that isn't
@@ -210,10 +213,16 @@ namespace XdtExtensions.Microsoft.Web.XmlTransform
                         switch (iter.NodeType)
                         {
                             case XmlNodeType.Whitespace:
+                                if (document.IsNewWhiteSpace(iter))
+                                {
+                                    iter = iter.PreviousSibling;
+                                    continue;
+                                }
                                 // Found the whitespace, loop can stop
                                 whitespace = iter;
                                 break;
                             case XmlNodeType.Element:
+                            case XmlNodeType.Comment:
                                 // Loop continues over new Elements
                                 if (IsNewNode(iter))
                                 {
@@ -228,7 +237,9 @@ namespace XdtExtensions.Microsoft.Web.XmlTransform
                         break;
                     }
 
-                    if (whitespace != null)
+                    if (whitespace != null 
+                       // && !document.IsNewWhiteSpace(whitespace)
+                        )
                     {
                         // We found whitespace to move. Remove it from where
                         // it is and add it back to the end

@@ -4,10 +4,10 @@
              namespace="XdtExtensions" />
 
   <appSettings>
-    <add key="storagePath" value="d:/temp/" xdt:Transform="InsertExt" xdt:Locator="Match(key)">
+    <remove key="storagePath" value="d:/temp/" xdt:Transform="InsertExt" xdt:Locator="Match(key)">
     <xdtExt:after>
     <!--  ###### Storage Section ##### -->
     </xdtExt:after>
-    </add>  
+    </remove>  
   </appSettings>
 </configuration>

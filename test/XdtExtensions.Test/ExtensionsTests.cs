@@ -8,7 +8,7 @@ namespace XdtExtensions.Test
     {
         [Theory]
         [InlineData("InsertExt_before")]
-        // [InlineData("InsertExt_after")] this one is failing at formatting
+        [InlineData("InsertExt_after")] //this one is failing at formatting
         public void InsertExt(string dir)
         {
             var rootPath = Path.Combine("Assets", dir);
@@ -44,6 +44,16 @@ namespace XdtExtensions.Test
         [Theory]
         [InlineData("RemoveAllExt")]
         public void RemoveAllExt(string dir)
+        {
+            var rootPath = Path.Combine("Assets", dir);
+            AssertionHelper.AssertResults(rootPath);
+        }
+
+        // fork impact
+        [Theory]
+        [InlineData("Insert")]
+        // [InlineData("InsertExt_after")] this one is failing at formatting
+        public void Insert(string dir)
         {
             var rootPath = Path.Combine("Assets", dir);
             AssertionHelper.AssertResults(rootPath);

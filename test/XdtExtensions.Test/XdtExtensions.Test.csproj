@@ -29,6 +29,9 @@
     <None Remove="Assets\InsertAfterExt_before\xdt.xml" />
     <None Remove="Assets\InsertAfterExt_before\xml-result.xml" />
     <None Remove="Assets\InsertAfterExt_before\xml.xml" />
+    <None Remove="Assets\Insert\xdt.xml" />
+    <None Remove="Assets\Insert\xml-result.xml" />
+    <None Remove="Assets\Insert\xml.xml" />
     <None Remove="Assets\InsertExt_after\xdt.xml" />
     <None Remove="Assets\InsertExt_after\xml-result.xml" />
     <None Remove="Assets\InsertExt_after\xml.xml" />
@@ -38,6 +41,9 @@
     <None Remove="Assets\RemoveExt\xdt.xml" />
     <None Remove="Assets\RemoveExt\xml-result.xml" />
     <None Remove="Assets\RemoveExt\xml.xml" />
+    <None Remove="Assets\XDT_Base_AttributeFormatting\xdt.xml" />
+    <None Remove="Assets\XDT_Base_AttributeFormatting\xml-result.xml" />
+    <None Remove="Assets\XDT_Base_AttributeFormatting\xml.xml" />
   </ItemGroup>
 
   <ItemGroup>

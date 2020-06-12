@@ -33,13 +33,13 @@ namespace XdtExtensions
                     string message = $"There was an unknown error on the transform.";
                     throw new Exception(message);
                 }
-
-                document.Save(new MemoryStream());
-                //ms.Position = 0;
-                //using (StreamReader sr = new StreamReader(ms, true))
-                //{
-                //    result = sr.ReadToEnd();
-                //}
+                using var ms = new MemoryStream();
+                document.Save(ms);
+                ms.Position = 0;
+                using (StreamReader sr = new StreamReader(ms, true))
+                {
+                    result = sr.ReadToEnd();
+                }
 
                 result = document.OuterXml;
             }
