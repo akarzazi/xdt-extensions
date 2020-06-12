@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30128.74
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XdtExtensions", "src\XdtExtensions\XdtExtensions.csproj", "{57B6D229-F7C6-4E1F-80AD-E04745718959}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{2F110D3A-CD0A-4817-A9A4-4C3057F6FB62}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XdtExtensions.Test", "test\XdtExtensions.Test\XdtExtensions.Test.csproj", "{697C5B2C-556C-411D-BCC1-719E700B35AF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "demo", "demo", "{A1377D04-9E09-4216-8A27-48A31827DCAE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo.XdtExtensions", "demo\Demo.XdtExtensions.csproj", "{BA50A56B-7040-49A4-A756-B84C685E8576}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XdtExtensions.Microsoft.Web.XmlTransform", "src\Microsoft.Web.XmlTransform\XdtExtensions.Microsoft.Web.XmlTransform.csproj", "{361260B4-6A5F-402D-981F-BAEF20A4F711}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{57B6D229-F7C6-4E1F-80AD-E04745718959}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57B6D229-F7C6-4E1F-80AD-E04745718959}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57B6D229-F7C6-4E1F-80AD-E04745718959}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57B6D229-F7C6-4E1F-80AD-E04745718959}.Release|Any CPU.Build.0 = Release|Any CPU
+		{697C5B2C-556C-411D-BCC1-719E700B35AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{697C5B2C-556C-411D-BCC1-719E700B35AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{697C5B2C-556C-411D-BCC1-719E700B35AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{697C5B2C-556C-411D-BCC1-719E700B35AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA50A56B-7040-49A4-A756-B84C685E8576}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA50A56B-7040-49A4-A756-B84C685E8576}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA50A56B-7040-49A4-A756-B84C685E8576}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA50A56B-7040-49A4-A756-B84C685E8576}.Release|Any CPU.Build.0 = Release|Any CPU
+		{361260B4-6A5F-402D-981F-BAEF20A4F711}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{361260B4-6A5F-402D-981F-BAEF20A4F711}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{361260B4-6A5F-402D-981F-BAEF20A4F711}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{361260B4-6A5F-402D-981F-BAEF20A4F711}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{697C5B2C-556C-411D-BCC1-719E700B35AF} = {2F110D3A-CD0A-4817-A9A4-4C3057F6FB62}
+		{BA50A56B-7040-49A4-A756-B84C685E8576} = {A1377D04-9E09-4216-8A27-48A31827DCAE}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9CA8DE7D-DC85-4DE7-8039-C53989E38774}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
+    <AssemblyName>XdtExtensions</AssemblyName>
+    <RootNamespace>XdtExtensions</RootNamespace>
+    <PackageDescription>Package extending the Xml Document Transform (XDT).</PackageDescription>
+    <RepositoryUrl>https://github.com/akarzazi/xdt-extensions</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageProjectUrl>https://github.com/akarzazi/xdt-extensions</PackageProjectUrl>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <!-- where should the nuget package be created at -->
+    <PackageOutputPath>.\nupkg</PackageOutputPath>
+    <Authors>Adel Karzazi</Authors>
+    <Product />
+    <Company />
+    <PackageTags>XDT Extensions XML Transform</PackageTags>
+    <Version>0.1.3</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Microsoft.Web.XmlTransform\XdtExtensions.Microsoft.Web.XmlTransform.csproj" PrivateAssets="all" />
+  </ItemGroup>
+
+  <Target Name="CopyProjectReferencesToPackage" DependsOnTargets="ResolveReferences">
+    <ItemGroup>
+      <BuildOutputInPackage Include="@(ReferenceCopyLocalPaths->WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))" />
+    </ItemGroup>
+  </Target>
+</Project>

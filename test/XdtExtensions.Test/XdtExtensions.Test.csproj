@@ -1,0 +1,61 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+
+    <RootNamespace>XdtExtensions</RootNamespace>
+
+    <AssemblyName>XdtExtensions.Test</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\**">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\InsertBeforeExt_after\xdt.xml" />
+    <None Remove="Assets\InsertBeforeExt_after\xml-result.xml" />
+    <None Remove="Assets\InsertBeforeExt_after\xml.xml" />
+    <None Remove="Assets\InsertAfterExt_after\xdt.xml" />
+    <None Remove="Assets\InsertAfterExt_after\xml-result.xml" />
+    <None Remove="Assets\InsertAfterExt_after\xml.xml" />
+    <None Remove="Assets\InsertBeforeExt_before\xdt.xml" />
+    <None Remove="Assets\InsertBeforeExt_before\xml-result.xml" />
+    <None Remove="Assets\InsertBeforeExt_before\xml.xml" />
+    <None Remove="Assets\InsertAfterExt_before\xdt.xml" />
+    <None Remove="Assets\InsertAfterExt_before\xml-result.xml" />
+    <None Remove="Assets\InsertAfterExt_before\xml.xml" />
+    <None Remove="Assets\InsertExt_after\xdt.xml" />
+    <None Remove="Assets\InsertExt_after\xml-result.xml" />
+    <None Remove="Assets\InsertExt_after\xml.xml" />
+    <None Remove="Assets\RemoveAllExt\xdt.xml" />
+    <None Remove="Assets\RemoveAllExt\xml-result.xml" />
+    <None Remove="Assets\RemoveAllExt\xml.xml" />
+    <None Remove="Assets\RemoveExt\xdt.xml" />
+    <None Remove="Assets\RemoveExt\xml-result.xml" />
+    <None Remove="Assets\RemoveExt\xml.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="coverlet.collector" Version="1.3.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Microsoft.Web.XmlTransform\XdtExtensions.Microsoft.Web.XmlTransform.csproj" />
+    <ProjectReference Include="..\..\src\XdtExtensions\XdtExtensions.csproj" />
+  </ItemGroup>
+
+</Project>

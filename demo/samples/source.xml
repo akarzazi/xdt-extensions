@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <appSettings>
+    <!-- firstParam comments-->
+    <add key="FistParam" value="10" />
+    
+    <!-- isProduction comments-->
+    <add key="isProduction" value="false" />
+    
+    <!-- this unwanted comment will be removed -->
+    
+    <!-- kafka comments
+    multiline-->
+    <add key="useKafka" value="false" />
+  </appSettings>
+</configuration>

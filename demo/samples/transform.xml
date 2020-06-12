@@ -1,0 +1,42 @@
+﻿<?xml version="1.0"?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform" xmlns:xdtExt="xdt-extensions" xml:space="preserve" >
+  <xdt:Import assembly="XdtExtensions"
+             namespace="XdtExtensions" />
+
+  <appSettings>
+    <add key="storagePath" value="d:/temp/" xdt:Transform="InsertIfMissingExt" xdt:Locator="Match(key)">
+    <xdtExt:before>
+
+    <!--  ###### Storage Section #####
+          ############################ -->
+    </xdtExt:before>
+    </add>
+
+    <add key="useHTTPS" value="true" xdt:Transform="InsertIfMissingExt" xdt:Locator="Match(key)">
+    <xdtExt:before>
+     
+    <!--  useHTTPS  -->
+    </xdtExt:before>
+    <xdtExt:after>
+    </xdtExt:after>
+    </add>
+    
+    <add key="beforeIsProduction" value="true" xdt:Transform="InsertBeforeExt(/configuration/appSettings/comment()[contains(.,'Production comments')])" >
+    <xdtExt:before><!-- I'll be before IsProduction tag -->
+    </xdtExt:before>
+    <xdtExt:after>
+
+    </xdtExt:after>
+    </add>    
+    
+    <add key="afterIsProduction" value="true" xdt:Transform="InsertAfterExt(/configuration/appSettings/add[@key='isProduction'])" >
+    <xdtExt:before>
+
+    <!-- I'll be after IsProduction tag -->
+    </xdtExt:before>
+    </add>
+    
+   <does_not_matter xdt:Transform="RemoveExt(/configuration/appSettings/comment()[contains(.,'unwanted comment')])" />
+    
+  </appSettings>
+</configuration>

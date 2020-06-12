@@ -1,0 +1,14 @@
+﻿<?xml version="1.0"?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform" xmlns:xdtExt="xdt-extensions" xml:space="preserve" >
+  <xdt:Import assembly="XdtExtensions"
+             namespace="XdtExtensions" />
+
+  <appSettings>
+    <add key="beforeIsStaging" value="true" xdt:Transform="InsertBeforeExt(/configuration/appSettings/add[@key='IsStaging'])" >    
+    <xdtExt:before>
+    <!--  ###### Comments before beforeIsStaging #####
+          ############################ -->
+    </xdtExt:before>
+    </add>  
+  </appSettings>
+</configuration>
