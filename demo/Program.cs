@@ -20,12 +20,10 @@ namespace TestExtension
                 var success = transformation.Apply(document);
                 if (!success)
                 {
-                    string message = $"There was an unknown error trying while trying to apply the transform.";
-                    throw new Exception(message);
+                    throw new Exception($"An error has occurred on apply transform, use IXmlTransformationLogger for more details.");
                 }
 
-                using var ms = new MemoryStream();
-                document.Save(ms);
+                document.Save(new MemoryStream());
 
                 if (xml == document.OuterXml)
                 {

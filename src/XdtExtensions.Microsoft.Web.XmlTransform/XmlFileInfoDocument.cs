@@ -18,7 +18,6 @@ namespace XdtExtensions.Microsoft.Web.XmlTransform
         private int _lineNumberOffset = 0;
         private int _linePositionOffset = 0;
 
-        private List<XmlWhitespace> newWhiteSpaces = new List<XmlWhitespace>();
         private List<XmlNode> newNodes = new List<XmlNode>();
 
         public override void Load(string filename)
@@ -354,25 +353,22 @@ namespace XdtExtensions.Microsoft.Web.XmlTransform
 
         public override XmlWhitespace CreateWhitespace(string text)
         {
-            System.Diagnostics.Debug.WriteLine($"{this.FirstLoad} CreateWhitespace text:{text}");
             var instance = base.CreateWhitespace(text);
+
             if (!this.FirstLoad)
                 newNodes.Add(instance);
+
             return instance;
         }
 
         public override XmlComment CreateComment(string data)
         {
-            System.Diagnostics.Debug.WriteLine($"{this.FirstLoad} CreateComment data:{data}");
             var instance = base.CreateComment(data);
+
             if (!this.FirstLoad)
                 newNodes.Add(instance);
-            return instance;
-        }
 
-        internal bool IsNewWhiteSpace(XmlNode node)
-        {
-            return newNodes.Contains(node);
+            return instance;
         }
 
         internal bool IsNewNode(XmlNode node)

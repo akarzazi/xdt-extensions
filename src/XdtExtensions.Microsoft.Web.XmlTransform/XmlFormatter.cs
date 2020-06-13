@@ -199,7 +199,7 @@ namespace XdtExtensions.Microsoft.Web.XmlTransform
                 XmlNode iter = node.LastChild;
                 if (iter != null && 
                     (iter.NodeType != XmlNodeType.Whitespace 
-                    || (iter.NodeType == XmlNodeType.Whitespace && document.IsNewWhiteSpace(iter))
+                    || (iter.NodeType == XmlNodeType.Whitespace && document.IsNewNode(iter))
                     )
                     )
                 {
@@ -213,7 +213,7 @@ namespace XdtExtensions.Microsoft.Web.XmlTransform
                         switch (iter.NodeType)
                         {
                             case XmlNodeType.Whitespace:
-                                if (document.IsNewWhiteSpace(iter))
+                                if (document.IsNewNode(iter))
                                 {
                                     iter = iter.PreviousSibling;
                                     continue;

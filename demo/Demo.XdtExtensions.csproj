@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Microsoft.Web.XmlTransform\XdtExtensions.Microsoft.Web.XmlTransform.csproj" />
+    <ProjectReference Include="..\src\XdtExtensions.Microsoft.Web.XmlTransform\XdtExtensions.Microsoft.Web.XmlTransform.csproj" />
     <ProjectReference Include="..\src\XdtExtensions\XdtExtensions.csproj" />
   </ItemGroup>
 

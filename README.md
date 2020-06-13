@@ -158,6 +158,37 @@ Transform XDT
 </configuration>
 ```
 
+# Usage
+
+Check the [demo project](demo) for a complete sample.
+
+```csharp
+var xml = File.ReadAllText("samples/source.xml");
+var xdt = File.ReadAllText("samples/transform.xml");
+
+using (XmlTransformableDocument document = new XmlTransformableDocument() { PreserveWhitespace = true })
+using (XmlTransformation transformation = new XmlTransformation(xdt, isTransformAFile: false, null))
+{
+    document.LoadXml(xml);
+
+    var success = transformation.Apply(document);
+    if (!success)
+    {
+        throw new Exception($"An error has occurred on apply transform, use IXmlTransformationLogger for more details.");
+    }
+
+    document.Save(new MemoryStream());
+
+    Console.WriteLine("Result: \n" + document.OuterXml);
+}
+```
+
+If you have an `assembly not found error` when using the extended transforms, make sure the `XdtExtensions` assembly is loaded by adding the following in the calling assembly.
+
+```csharp
+private string _loadXdtExtensionsAssembly = XdtExtensions.DefaultNamespace.Namespace;
+```
+
 # Contributing
 
 We're glad to know you're interested in the project.
