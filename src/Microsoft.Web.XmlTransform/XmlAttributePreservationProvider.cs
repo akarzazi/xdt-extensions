@@ -17,6 +17,11 @@ namespace XdtExtensions.Microsoft.Web.XmlTransform
             reader = new PositionTrackingTextReader(streamReader);
         }
 
+        public XmlAttributePreservationProvider(StreamReader streamReader)
+        {
+            reader = new PositionTrackingTextReader(streamReader);
+        }
+
         public XmlAttributePreservationDict GetDictAtPosition(int lineNumber, int linePosition) {
             if (reader.ReadToPosition(lineNumber, linePosition)) {
                 Debug.Assert((char)reader.Peek() == '<');

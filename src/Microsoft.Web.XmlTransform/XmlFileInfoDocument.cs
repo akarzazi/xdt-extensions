@@ -31,6 +31,7 @@ namespace XdtExtensions.Microsoft.Web.XmlTransform
         public override void Load(XmlReader reader)
         {
             _reader = reader as XmlTextReader;
+
             if (_reader != null)
             {
                 _fileName = _reader.BaseURI;
@@ -43,6 +44,37 @@ namespace XdtExtensions.Microsoft.Web.XmlTransform
                 _textEncoding = _reader.Encoding;
             }
 
+            _firstLoad = false;
+        }
+
+        public override void LoadXml(string xml)
+        {
+            StreamReader reader = null;
+            try
+            {
+                if (PreserveWhitespace)
+                {
+                    byte[] byteArray = Encoding.UTF8.GetBytes(xml);
+                    MemoryStream stream = new MemoryStream(byteArray);
+                    reader = new StreamReader(stream, Encoding.UTF8);
+
+                    _preservationProvider = new XmlAttributePreservationProvider(reader);
+                }
+
+                base.LoadXml(xml);
+            }
+            finally
+            {
+                if (_preservationProvider != null)
+                {
+                    _preservationProvider.Close();
+                    _preservationProvider = null;
+                }
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+            }
             _firstLoad = false;
         }
 

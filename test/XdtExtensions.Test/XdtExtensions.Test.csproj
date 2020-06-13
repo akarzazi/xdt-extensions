@@ -41,9 +41,15 @@
     <None Remove="Assets\RemoveExt\xdt.xml" />
     <None Remove="Assets\RemoveExt\xml-result.xml" />
     <None Remove="Assets\RemoveExt\xml.xml" />
+    <None Remove="Assets\Replace\xdt.xml" />
+    <None Remove="Assets\Replace\xml-result.xml" />
+    <None Remove="Assets\Replace\xml.xml" />
     <None Remove="Assets\XDT_Base_AttributeFormatting\xdt.xml" />
     <None Remove="Assets\XDT_Base_AttributeFormatting\xml-result.xml" />
     <None Remove="Assets\XDT_Base_AttributeFormatting\xml.xml" />
+    <None Remove="Assets\XDT_Base_TagFormatting\xdt.xml" />
+    <None Remove="Assets\XDT_Base_TagFormatting\xml-result.xml" />
+    <None Remove="Assets\XDT_Base_TagFormatting\xml.xml" />
   </ItemGroup>
 
   <ItemGroup>

@@ -3,10 +3,12 @@
 using XdtExtensions.Microsoft.Web.XmlTransform;
 
 using XdtExtensions.Helpers;
+using XdtExtensions.Microsoft.Web.XmlTransform.Properties;
+using System.Globalization;
 
 namespace XdtExtensions
 {
-    public class InsertExt : Transform
+    internal class InsertExt : Transform
     {
         public InsertExt()
                    : base(TransformFlags.UseParentAsTargetNode, MissingTargetMessage.Error)
@@ -15,12 +17,15 @@ namespace XdtExtensions
 
         protected override void Apply()
         {
+            CommonErrors.ExpectNoArguments(Log, TransformNameShort, ArgumentString);
+
             TargetNode.AppendChildren(InsertBehavior.InsertExtension(TransformNode));
-            Log.LogMessage(MessageType.Verbose, "Inserted '{0}' element", TransformNode.Name);
+
+            Log.LogMessage(MessageType.Verbose, Resources.XMLTRANSFORMATION_TransformMessageInsert, TransformNode.Name);
         }
     }
 
-    public class InsertIfMissingExt : InsertExt
+    internal class InsertIfMissingExt : InsertExt
     {
         public InsertIfMissingExt()
                    : base()
@@ -32,6 +37,7 @@ namespace XdtExtensions
             if (this.TargetChildNodes == null || this.TargetChildNodes.Count == 0)
             {
                 base.Apply();
+                Log.LogMessage(MessageType.Verbose, Resources.XMLTRANSFORMATION_TransformMessageInsert, TransformNode.Name);
             }
         }
     }
@@ -53,11 +59,11 @@ namespace XdtExtensions
                 {
                     if (Arguments == null || Arguments.Count == 0)
                     {
-                        throw new XmlTransformationException(string.Format("{0} requires an XPath argument", GetType().Name));
+                        throw new XmlTransformationException(string.Format(CultureInfo.CurrentCulture, Resources.XMLTRANSFORMATION_InsertMissingArgument, GetType().Name));
                     }
                     else if (Arguments.Count > 1)
                     {
-                        throw new XmlTransformationException(string.Format("Too many arguments to {0}", GetType().Name));
+                        throw new XmlTransformationException(string.Format(CultureInfo.CurrentCulture, Resources.XMLTRANSFORMATION_InsertTooManyArguments, GetType().Name));
                     }
                     else
                     {
@@ -65,7 +71,7 @@ namespace XdtExtensions
                         XmlNodeList siblings = TargetNode.SelectNodes(xpath);
                         if (siblings.Count == 0)
                         {
-                            throw new XmlTransformationException(string.Format("No element in the source document matches '{0}'", xpath));
+                            throw new XmlTransformationException(string.Format(CultureInfo.CurrentCulture, Resources.XMLTRANSFORMATION_InsertBadXPath, xpath));
                         }
                         else
                         {
@@ -91,8 +97,7 @@ namespace XdtExtensions
                 reference = node;
             }
 
-
-            Log.LogMessage(MessageType.Verbose, string.Format("Inserted '{0}' element", TransformNode.Name));
+            Log.LogMessage(MessageType.Verbose, string.Format(CultureInfo.CurrentCulture, Resources.XMLTRANSFORMATION_TransformMessageInsert, TransformNode.Name));
         }
     }
 
@@ -106,7 +111,7 @@ namespace XdtExtensions
                 SiblingElement.ParentNode.InsertBefore(node, SiblingElement);
             }
 
-            Log.LogMessage(MessageType.Verbose, string.Format("Inserted '{0}' element", TransformNode.Name));
+            Log.LogMessage(MessageType.Verbose, string.Format(CultureInfo.CurrentCulture, Resources.XMLTRANSFORMATION_TransformMessageInsert, TransformNode.Name));
         }
     }
 }

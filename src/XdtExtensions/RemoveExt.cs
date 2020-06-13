@@ -4,10 +4,11 @@ using System.Xml;
 using XdtExtensions.Microsoft.Web.XmlTransform;
 
 using XdtExtensions.Helpers;
+using System.Security.Cryptography.X509Certificates;
 
 namespace XdtExtensions
 {
-    public class RemoveExt : Transform
+    internal class RemoveExt : Transform
     {
         public RemoveExt()
          : base(TransformFlags.UseParentAsTargetNode, MissingTargetMessage.Information)
@@ -16,7 +17,8 @@ namespace XdtExtensions
 
         protected override void Apply()
         {
-            var targets = FindTargets();
+            CommonErrors.WarnIfMultipleTargets(Log, TransformNameShort, TargetNodes, ApplyTransformToAllTargetNodes);
+            var targets = XmlDomHelpers.FindTargetsFromXPathArg(Arguments, TargetNode, nameof(RemoveExt));
 
             foreach (var target in targets)
             {
@@ -24,35 +26,19 @@ namespace XdtExtensions
                 break;
             }
         }
-
-        protected IReadOnlyCollection<XmlNode> FindTargets()
-        {
-            if (Arguments == null || Arguments.Count == 0)
-            {
-                throw new XmlTransformationException(string.Format(System.Globalization.CultureInfo.CurrentCulture, "{0} requires an XPath argument", GetType().Name));
-            }
-            else if (Arguments.Count > 1)
-            {
-                throw new XmlTransformationException(string.Format(System.Globalization.CultureInfo.CurrentCulture, "Too many arguments to {0}", GetType().Name));
-            }
-            else
-            {
-                string xpath = Arguments[0];
-                return TargetNode.SelectNodes(xpath).ToCollection();
-            }
-        }
     }
 
-    internal class RemoveAllExt : RemoveExt
+    internal class RemoveAllExt : Transform
     {
         public RemoveAllExt()
+            : base(TransformFlags.UseParentAsTargetNode, MissingTargetMessage.Information)
         {
             ApplyTransformToAllTargetNodes = true;
         }
 
         protected override void Apply()
         {
-            var targets = FindTargets();
+            var targets = XmlDomHelpers.FindTargetsFromXPathArg(Arguments, TargetNode, nameof(RemoveExt));
 
             foreach (var target in targets)
             {

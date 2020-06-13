@@ -1,0 +1,10 @@
+﻿<?xml version="1.0"?>
+<configuration>
+  <system.web>
+    <compilation debug="true" strict="true" batch="true" />
+
+    <application user="guest" type="web">
+      <sub>new content</sub>
+    </application>
+  </system.web>
+</configuration>

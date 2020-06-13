@@ -4,14 +4,14 @@ using Xunit;
 
 namespace XdtExtensions.Test
 {
-    public class XdtBaseTests
+    public class XdtLibTests
     {
         [Theory]
         [InlineData("XDT_Base_AttributeFormatting")]
+        //[InlineData("XDT_Base_TagFormatting")] not the same, but better output
         public void XDT_Base(string dir)
         {
-            var rootPath = Path.Combine("Assets", dir);
-            AssertionHelper.AssertResults(rootPath);
+            AssertionHelper.AssertResults(dir);
         }
     }
 }

@@ -11,8 +11,10 @@ namespace XdtExtensions
 {
     public class AssertionHelper
     {
-        public static void AssertResults(string rootPath)
+        public static void AssertResults(string dir, bool assertOnOuterXml = false)
         {
+            var rootPath = Path.Combine("Assets", dir);
+
             var xmlPath = Path.Combine(rootPath, "xml.xml");
             var xdtPath = Path.Combine(rootPath, "xdt.xml");
             var resultPath = Path.Combine(rootPath, "xml-result.xml");
@@ -25,7 +27,7 @@ namespace XdtExtensions
             using (XmlTransformableDocument document = new XmlTransformableDocument() { PreserveWhitespace = true })
             using (XmlTransformation transformation = new XmlTransformation(xdt, isTransformAFile: false, null))
             {
-                document.LoadXml(xml);
+                document.Load(xmlPath);
 
                 var success = transformation.Apply(document);
                 if (!success)
@@ -35,13 +37,19 @@ namespace XdtExtensions
                 }
                 using var ms = new MemoryStream();
                 document.Save(ms);
-                ms.Position = 0;
-                using (StreamReader sr = new StreamReader(ms, true))
-                {
-                    result = sr.ReadToEnd();
-                }
 
-                result = document.OuterXml;
+                if (assertOnOuterXml)
+                {
+                    result = document.OuterXml;
+                }
+                else
+                {
+                    ms.Position = 0;
+                    using (StreamReader sr = new StreamReader(ms, true))
+                    {
+                        result = sr.ReadToEnd();
+                    }
+                }
             }
 
             var expectedLines = expected.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);

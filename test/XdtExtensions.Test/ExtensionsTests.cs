@@ -8,55 +8,23 @@ namespace XdtExtensions.Test
     {
         [Theory]
         [InlineData("InsertExt_before")]
-        [InlineData("InsertExt_after")] //this one is failing at formatting
-        public void InsertExt(string dir)
-        {
-            var rootPath = Path.Combine("Assets", dir);
-            AssertionHelper.AssertResults(rootPath);
-        }
-
-        [Theory]
+        [InlineData("InsertExt_after")]
         [InlineData("InsertAfterExt_before")]
         [InlineData("InsertAfterExt_after")]
-        public void InsertAfterExt(string dir)
-        {
-            var rootPath = Path.Combine("Assets", dir);
-            AssertionHelper.AssertResults(rootPath);
-        }
-
-        [Theory]
         [InlineData("InsertBeforeExt_before")]
         [InlineData("InsertBeforeExt_after")]
-        public void InsertBeforeExt(string dir)
-        {
-            var rootPath = Path.Combine("Assets", dir);
-            AssertionHelper.AssertResults(rootPath);
-        }
-
-        [Theory]
         [InlineData("RemoveExt")]
-        public void RemoveExt(string dir)
-        {
-            var rootPath = Path.Combine("Assets", dir);
-            AssertionHelper.AssertResults(rootPath);
-        }
-
-        [Theory]
         [InlineData("RemoveAllExt")]
-        public void RemoveAllExt(string dir)
+        public void Extensions(string dir)
         {
-            var rootPath = Path.Combine("Assets", dir);
-            AssertionHelper.AssertResults(rootPath);
+            AssertionHelper.AssertResults(dir, assertOnOuterXml: true);
         }
 
-        // fork impact
         [Theory]
         [InlineData("Insert")]
-        // [InlineData("InsertExt_after")] this one is failing at formatting
         public void Insert(string dir)
         {
-            var rootPath = Path.Combine("Assets", dir);
-            AssertionHelper.AssertResults(rootPath);
+            AssertionHelper.AssertResults(dir, assertOnOuterXml: true);
         }
     }
 }
