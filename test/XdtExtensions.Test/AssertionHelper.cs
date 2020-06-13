@@ -11,7 +11,7 @@ namespace XdtExtensions
 {
     public class AssertionHelper
     {
-        public static void AssertResults(string dir, bool assertOnOuterXml = false)
+        public static void AssertResults(string dir, bool preserveAttributeSpace = false, bool assertOnOuterXml = false)
         {
             var rootPath = Path.Combine("Assets", dir);
 
@@ -24,7 +24,7 @@ namespace XdtExtensions
             var expected = File.ReadAllText(resultPath);
 
             var result = "";
-            using (XmlTransformableDocument document = new XmlTransformableDocument() { PreserveWhitespace = true })
+            using (XmlTransformableDocument document = new XmlTransformableDocument() { PreserveWhitespace = true, PreserveAttributesSpace = preserveAttributeSpace })
             using (XmlTransformation transformation = new XmlTransformation(xdt, isTransformAFile: false, null))
             {
                 document.Load(xmlPath);

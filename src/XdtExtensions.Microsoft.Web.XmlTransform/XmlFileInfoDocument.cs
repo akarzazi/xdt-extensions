@@ -9,6 +9,8 @@ namespace XdtExtensions.Microsoft.Web.XmlTransform
 {
     public class XmlFileInfoDocument : XmlDocument, IDisposable
     {
+        public bool PreserveAttributesSpace { get; set; }
+
         private Encoding _textEncoding = null;
         private XmlTextReader _reader = null;
         private XmlAttributePreservationProvider _preservationProvider = null;
@@ -18,7 +20,7 @@ namespace XdtExtensions.Microsoft.Web.XmlTransform
         private int _lineNumberOffset = 0;
         private int _linePositionOffset = 0;
 
-        private List<XmlNode> newNodes = new List<XmlNode>();
+        private HashSet<XmlNode> newNodes = new HashSet<XmlNode>();
 
         public override void Load(string filename)
         {
@@ -51,12 +53,10 @@ namespace XdtExtensions.Microsoft.Web.XmlTransform
             StreamReader reader = null;
             try
             {
-                if (PreserveWhitespace)
+                if (PreserveWhitespace && PreserveAttributesSpace)
                 {
-                    byte[] byteArray = Encoding.UTF8.GetBytes(xml);
-                    MemoryStream stream = new MemoryStream(byteArray);
+                    MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(xml));
                     reader = new StreamReader(stream, Encoding.UTF8);
-
                     _preservationProvider = new XmlAttributePreservationProvider(reader);
                 }
 
@@ -84,7 +84,7 @@ namespace XdtExtensions.Microsoft.Web.XmlTransform
             StreamReader reader = null;
             try
             {
-                if (PreserveWhitespace)
+                if (PreserveWhitespace && PreserveAttributesSpace)
                 {
                     _preservationProvider = new XmlAttributePreservationProvider(filename);
                 }

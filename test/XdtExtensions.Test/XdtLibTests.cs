@@ -11,7 +11,7 @@ namespace XdtExtensions.Test
         //[InlineData("XDT_Base_TagFormatting")] not the same, but better output
         public void XDT_Base(string dir)
         {
-            AssertionHelper.AssertResults(dir);
+            AssertionHelper.AssertResults(dir, preserveAttributeSpace: true);
         }
     }
 }

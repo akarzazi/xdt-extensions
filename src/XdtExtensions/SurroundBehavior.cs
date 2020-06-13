@@ -7,9 +7,9 @@ using XdtExtensions.Helpers;
 
 namespace XdtExtensions
 {
-    public class InsertBehavior
+    public class SurroundBehavior
     {
-        public static IReadOnlyCollection<XmlNode> InsertExtension(XmlNode TransformNode)
+        public static IReadOnlyCollection<XmlNode> ExtractNodes(XmlNode TransformNode)
         {
             var beforeNodes = XmlExtHelpers.GetBeforeNodes(TransformNode);
             var afterNodes = XmlExtHelpers.GetAfterNodes(TransformNode);

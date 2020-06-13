@@ -1,7 +1,7 @@
 # XDT-Extensions
 Package extending the Xml Document Transform (XDT).
 
-![.NET Core](https://github.com/akarzazi/XdtExtensions/workflows/.NET%20Core/badge.svg)
+![.NET Core](https://github.com/akarzazi/xdt-extensions/workflows/.NET%20Core/badge.svg)
 
 # Nuget Package
 .Net Standard 2.1

@@ -17,6 +17,27 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Assets\InsertAllExt_before\xdt.xml" />
+    <None Remove="Assets\InsertAllExt_before\xml-result.xml" />
+    <None Remove="Assets\InsertAllExt_before\xml.xml" />
+    <None Remove="Assets\ReplaceAllExt\xdt.xml" />
+    <None Remove="Assets\ReplaceAllExt\xml-result.xml" />
+    <None Remove="Assets\ReplaceAllExt\xml.xml" />
+    <None Remove="Assets\ReplaceAllExt_after\xdt.xml" />
+    <None Remove="Assets\ReplaceAllExt_after\xml-result.xml" />
+    <None Remove="Assets\ReplaceAllExt_after\xml.xml" />
+    <None Remove="Assets\ReplaceAllExt_before\xdt.xml" />
+    <None Remove="Assets\ReplaceAllExt_before\xml-result.xml" />
+    <None Remove="Assets\ReplaceAllExt_before\xml.xml" />
+    <None Remove="Assets\ReplaceExt_before\xdt.xml" />
+    <None Remove="Assets\ReplaceExt_before\xml-result.xml" />
+    <None Remove="Assets\ReplaceExt_before\xml.xml" />
+    <None Remove="Assets\ReplaceExt_after\xdt.xml" />
+    <None Remove="Assets\ReplaceExt_after\xml-result.xml" />
+    <None Remove="Assets\ReplaceExt_after\xml.xml" />
+    <None Remove="Assets\InsertAllExt_after\xdt.xml" />
+    <None Remove="Assets\InsertAllExt_after\xml-result.xml" />
+    <None Remove="Assets\InsertAllExt_after\xml.xml" />
     <None Remove="Assets\InsertBeforeExt_after\xdt.xml" />
     <None Remove="Assets\InsertBeforeExt_after\xml-result.xml" />
     <None Remove="Assets\InsertBeforeExt_after\xml.xml" />

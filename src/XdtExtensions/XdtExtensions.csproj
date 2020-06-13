@@ -7,7 +7,8 @@
     
     <AssemblyName>XdtExtensions</AssemblyName>
     <RootNamespace>XdtExtensions</RootNamespace>
-    <PackageDescription>Package extending the Xml Document Transform (XDT).</PackageDescription>
+    <PackageId>XDT.Extensions</PackageId>
+    <PackageDescription>XdtExtensions lib adds new transform operations for XDT (Xml Document Transform)</PackageDescription>
     <RepositoryUrl>https://github.com/akarzazi/xdt-extensions</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageProjectUrl>https://github.com/akarzazi/xdt-extensions</PackageProjectUrl>
@@ -17,7 +18,7 @@
     <Product />
     <Company />
     <PackageTags>XDT Extensions XML Transform</PackageTags>
-    <Version>1.0.2</Version>
+    <Version>1.0.5</Version>
     
   </PropertyGroup>
 

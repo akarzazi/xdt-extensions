@@ -1,0 +1,15 @@
+﻿<?xml version="1.0"?>
+<configuration>
+  <appSettings site="1">
+    <add key="IsStaging" value="True" />
+    <add key="Environment" value="Prod" />
+    <add key="NewNode" value="NewValue" />
+    <!--  Storage Section  -->
+  </appSettings>
+  <appSettings site="2">
+    <add key="IsStaging" value="True" />
+    <add key="Environment" value="Dev" />
+    <add key="NewNode" value="NewValue" />
+    <!--  Storage Section  -->
+  </appSettings>
+</configuration>

@@ -19,7 +19,25 @@ namespace XdtExtensions
         {
             CommonErrors.ExpectNoArguments(Log, TransformNameShort, ArgumentString);
 
-            TargetNode.AppendChildren(InsertBehavior.InsertExtension(TransformNode));
+            TargetNode.AppendChildren(SurroundBehavior.ExtractNodes(TransformNode));
+
+            Log.LogMessage(MessageType.Verbose, Resources.XMLTRANSFORMATION_TransformMessageInsert, TransformNode.Name);
+        }
+    }
+
+    internal class InsertAllExt : Transform
+    {
+        public InsertAllExt()
+            : base(TransformFlags.UseParentAsTargetNode, MissingTargetMessage.Error)
+        {
+            ApplyTransformToAllTargetNodes = true;
+        }
+
+        protected override void Apply()
+        {
+            CommonErrors.ExpectNoArguments(Log, TransformNameShort, ArgumentString);
+
+            TargetNode.AppendChildren(SurroundBehavior.ExtractNodes(TransformNode));
 
             Log.LogMessage(MessageType.Verbose, Resources.XMLTRANSFORMATION_TransformMessageInsert, TransformNode.Name);
         }
@@ -89,7 +107,7 @@ namespace XdtExtensions
     {
         protected override void Apply()
         {
-            var nodes = InsertBehavior.InsertExtension(TransformNode);
+            var nodes = SurroundBehavior.ExtractNodes(TransformNode);
             XmlNode reference = SiblingElement;
             foreach (var node in nodes)
             {
@@ -105,7 +123,7 @@ namespace XdtExtensions
     {
         protected override void Apply()
         {
-            var nodes = InsertBehavior.InsertExtension(TransformNode);
+            var nodes = SurroundBehavior.ExtractNodes(TransformNode);
             foreach (var node in nodes)
             {
                 SiblingElement.ParentNode.InsertBefore(node, SiblingElement);

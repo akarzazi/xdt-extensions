@@ -1,0 +1,10 @@
+﻿<?xml version="1.0"?>
+<configuration>
+  <appSettings>
+    <add key="IsStaging" value="True" />
+    <!--  ###### Comment above #######
+          ############################ -->
+    <add key="Environment" value="NewValue" />
+    <add key="BatchSize" value="10" />
+  </appSettings>
+</configuration>
