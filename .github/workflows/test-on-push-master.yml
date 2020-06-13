@@ -2,8 +2,25 @@ name: .NET Core
 
 on:
   push:
+    paths:
+    - 'src/**'
+    - 'test/**'
+    - 'build.ps1'
+
+    paths-ignore:
+    - 'docs/**'
+    
     branches: [ master ]
+    
   pull_request:
+    paths:
+    - 'src/**'
+    - 'test/**'
+    - 'build.ps1'
+    
+    paths-ignore:
+    - 'docs/**'
+    
     branches: [ master ]
 
 jobs:
