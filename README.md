@@ -38,7 +38,7 @@ You can try and browse the XML document transformations on the [Playground](http
 # Nuget Package
 .Net Standard 2.1
 
-https://www.nuget.org/packages/XdtExtensions/
+https://www.nuget.org/packages/XDT.Extensions
 
 # Use cases
 
