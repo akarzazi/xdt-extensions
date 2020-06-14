@@ -12,6 +12,15 @@ This package overcomes some limitations of XDT around comments insertion and for
 
 It brings new transform functions that enables injecting comments and spaces while inserting elements.
 
+# Try it online
+
+You can try and browse the XML document transformations on the [Playground](https://akarzazi.github.io/xdt-playground).
+
+# Nuget Package
+.Net Standard 2.1
+
+https://www.nuget.org/packages/XDT.Extensions
+
 ## Table of content
 - [Try it online](#try-it-online)
 - [Nuget Package](#nuget-package)
@@ -29,16 +38,6 @@ It brings new transform functions that enables injecting comments and spaces whi
   * [How can I contribute ?](#how-can-i-contribute--)
 
 
-
-# Try it online
-
-You can try and browse the XML document transformations on the [Playground](https://akarzazi.github.io/xdt-playground).
-
-
-# Nuget Package
-.Net Standard 2.1
-
-https://www.nuget.org/packages/XDT.Extensions
 
 # Use cases
 
