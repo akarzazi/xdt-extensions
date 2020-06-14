@@ -1,17 +1,44 @@
 # XDT-Extensions
-Package extending the Xml Document Transform (XDT).
+Package extending the Xml Document Transform XDT.
 
 ![.NET Core](https://github.com/akarzazi/xdt-extensions/workflows/.NET%20Core/badge.svg)
+
+More about the XDT format and syntax :
+
+https://docs.microsoft.com/en-us/previous-versions/aspnet/dd465326(v=vs.110)?redirectedfrom=MSDN#transform-attribute-syntax
+
+
+This package overcomes some limitations of XDT around comments insertion and formatting. 
+
+It brings new transform functions that enables injecting comments and spaces while inserting elements.
+
+## Table of content
+- [Try it online](#try-it-online)
+- [Nuget Package](#nuget-package)
+- [Use cases](#use-cases)
+  * [Add a section with comments above](#add-a-section-with-comments-above)
+  * [Insert a section with comments above and below](#insert-a-section-with-comments-above-and-below)
+  * [Remove specific comments with XPath](#remove-specific-comments-with-xpath)
+- [Usage](#usage)
+  * [Notes](#notes)
+  * [Troubleshooting](#troubleshooting)
+- [Extension Transforms Reference](#extension-transforms-reference)
+  * [Insert / Replace](#insert---replace)
+  * [Remove](#remove)
+- [Contributing](#contributing)
+  * [How can I contribute ?](#how-can-i-contribute--)
+
+
+
+# Try it online
+
+You can try and browse the XML document transformations on the [Playground](https://akarzazi.github.io/xdt-playground).
+
 
 # Nuget Package
 .Net Standard 2.1
 
 https://www.nuget.org/packages/XdtExtensions/
-
-# Why
-This package overcomes some limitations of XDT mostly around comments and formatting. 
-
-It brings new transform functions that enables injecting comments and spaces while inserting tags.
 
 # Use cases
 
@@ -163,6 +190,8 @@ Transform XDT
 Check the [demo project](demo) for a complete sample.
 
 ```csharp
+// using XdtExtensions.Microsoft.Web.XmlTransform
+
 var xml = File.ReadAllText("samples/source.xml");
 var xdt = File.ReadAllText("samples/transform.xml");
 
@@ -182,12 +211,62 @@ using (XmlTransformation transformation = new XmlTransformation(xdt, isTransform
     Console.WriteLine("Result: \n" + document.OuterXml);
 }
 ```
+## Notes
+
+A fork of the [XDT package](https://github.com/dotnet/xdt) is bundled with the package to better manage spacing and formatting under the namespace `XdtExtensions.Microsoft.Web.XmlTransform`.
+
+## Troubleshooting
 
 If you have an `assembly not found error` when using the extended transforms, make sure the `XdtExtensions` assembly is loaded by adding the following in the calling assembly.
 
 ```csharp
 private string _loadXdtExtensionsAssembly = XdtExtensions.DefaultNamespace.Namespace;
 ```
+
+# Extension Transforms Reference
+
+## Insert / Replace
+
+All the following transform operations that create content can leverage  the meta tags `:before` and `:after` to inject content before and/or after the `TagElement` as shown below.
+
+```XML
+    <TagElement  xdt:Transform="TransformOperation" />
+    <xdtExt:before>
+    <!--   Content injected before the tag  -->
+    </xdtExt:before>
+    <xdtExt:after>
+    <!--   Content injected before   -->
+    </xdtExt:after>
+    </TagElement>
+    
+```
+
+| Transform Operation  | Description | 
+|----------|-------------|
+| InsertExt | Same as Insert | 
+| InsertIfMissingExt | Same as InsertIfMissing   |
+| InsertAllExt | Insert in all matched locations |
+| InsertBeforeExt | Same as InsertBefore |
+| InsertAfterExt | Same as InsertAfter |
+| ReplaceExt | Same as Replace |
+| ReplaceAllExt | Replaces at all matched locations |
+
+## Remove
+
+The Remove operations can target any node type using XPath as an argument, thus it can be used to remove comments.
+
+Note that the tag and the location do not matter.
+```XML
+<does_not_matter 
+     xdt:Transform="RemoveExt(//appSettings/comment()[contains(.,'unwanted comment')])" />
+
+```
+
+| Transform Operation  | Description | 
+|----------|-------------|
+| RemoveExt | Removes the first matched node | 
+| RemoveAllExt | Removes all matched nodes |
+
 
 # Contributing
 
