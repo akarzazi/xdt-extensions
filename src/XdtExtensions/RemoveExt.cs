@@ -1,10 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Xml;
-
-using XdtExtensions.Microsoft.Web.XmlTransform;
-
+﻿
 using XdtExtensions.Helpers;
-using System.Security.Cryptography.X509Certificates;
+using XdtExtensions.Microsoft.Web.XmlTransform;
 
 namespace XdtExtensions
 {

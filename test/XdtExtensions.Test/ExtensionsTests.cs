@@ -22,6 +22,7 @@ namespace XdtExtensions.Test
         [InlineData("ReplaceAllExt")]
         [InlineData("ReplaceAllExt_after")]
         [InlineData("ReplaceAllExt_before")]
+        [InlineData("SetAttributeRegexExt")]
         public void Extensions(string dir)
         {
             AssertionHelper.AssertResults(dir, assertOnOuterXml: true);

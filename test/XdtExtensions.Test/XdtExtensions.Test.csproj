@@ -20,6 +20,9 @@
     <None Remove="Assets\InsertAllExt_before\xdt.xml" />
     <None Remove="Assets\InsertAllExt_before\xml-result.xml" />
     <None Remove="Assets\InsertAllExt_before\xml.xml" />
+    <None Remove="Assets\SetAttributeRegexExt\xdt.xml" />
+    <None Remove="Assets\SetAttributeRegexExt\xml-result.xml" />
+    <None Remove="Assets\SetAttributeRegexExt\xml.xml" />
     <None Remove="Assets\ReplaceAllExt\xdt.xml" />
     <None Remove="Assets\ReplaceAllExt\xml-result.xml" />
     <None Remove="Assets\ReplaceAllExt\xml.xml" />
